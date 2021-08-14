@@ -1,0 +1,23 @@
+{
+  "name": "rp_door_watcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/rp_door_watcher"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@serialport/parser-readline": "^9.0.7",
+    "serialport": "^9.2.0",
+    "ts-node": "^10.1.0"
+  },
+  "devDependencies": {
+    "@types/serialport": "^8.0.2"
+  }
+}
