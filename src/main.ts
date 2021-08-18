@@ -1,7 +1,9 @@
-import { ReceiverAgent } from './lib/receiver';
+import { RadioReceiverAgent } from './lib/radio_receiver';
 
 function init() {
-  ReceiverAgent.init();
+  // TODO:抽象化して複数チャンネルで使えるようにする
+  RadioReceiverAgent.init();
+  // 検知後switchbotを起動するか判定（状態管理必要）
 }
 
 init();

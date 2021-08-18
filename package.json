@@ -14,10 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "@serialport/parser-readline": "^9.0.7",
+    "noble": "^1.9.1",
     "serialport": "^9.2.0",
     "ts-node": "^10.1.0"
   },
   "devDependencies": {
+    "@types/noble": "^0.0.40",
     "@types/serialport": "^8.0.2"
   }
 }

@@ -1,12 +1,14 @@
 import SerialPort, { parsers } from 'serialport';
+import { IRadioReceiverListener } from '../interfaces';
 
 const DEVICE = process.env.DEVICE ?? '/dev/ttyUSB0';
 const BAUD_RATE = 115200;
 
-class ReceiverAgentImpl {
+class RadioReceiverAgentImpl {
   port?: SerialPort;
+  listeners: IRadioReceiverListener[] = [];
   constructor() {}
-  init() {
+  public init() {
     this.port = new SerialPort(DEVICE, {
       baudRate: BAUD_RATE,
     });
@@ -35,8 +37,32 @@ class ReceiverAgentImpl {
         ' mV) => ' +
         sensorValue;
       console.log(str);
+
+      this.listeners.forEach((listener: IRadioReceiverListener) => {
+        listener.render({
+          sensorId,
+          sensorVoltage,
+          sensorValue,
+        });
+      });
     });
+  }
+
+  public addEventListener(listener: IRadioReceiverListener) {
+    if (this.listeners.includes(listener)) {
+      return;
+    }
+    this.listeners.push(listener);
+  }
+
+  public removeEventListener(listener: IRadioReceiverListener) {
+    if (this.listeners.includes(listener)) {
+      return;
+    }
+    this.listeners = this.listeners.filter(
+      (_listener: IRadioReceiverListener) => listener === _listener
+    );
   }
 }
 
-export const ReceiverAgent = new ReceiverAgentImpl();
+export const RadioReceiverAgent = new RadioReceiverAgentImpl();
