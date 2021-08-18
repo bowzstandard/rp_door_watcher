@@ -26,7 +26,7 @@ class RadioReceiverAgentImpl {
       const date = new Date();
       const sensorId = data.substr(1, 2);
       const sensorVoltage = data.substr(27, 4);
-      const sensorValue = data.substr(40, 2);
+      const sensorValue = data.substr(39, 2);
 
       const str =
         date.toString() +
@@ -36,7 +36,7 @@ class RadioReceiverAgentImpl {
         parseInt(sensorVoltage, 16) +
         ' mV) => ' +
         sensorValue;
-      console.log(str, data);
+      console.log(str);
 
       this.listeners.forEach((listener: IRadioReceiverListener) => {
         listener.render({
