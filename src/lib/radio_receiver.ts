@@ -26,7 +26,7 @@ class RadioReceiverAgentImpl {
       const date = new Date();
       const sensorId = data.substr(1, 2);
       const sensorVoltage = data.substr(27, 4);
-      const sensorValue = data.substr(33, 2);
+      const sensorValue = data.substr(40, 2);
 
       const str =
         date.toString() +
