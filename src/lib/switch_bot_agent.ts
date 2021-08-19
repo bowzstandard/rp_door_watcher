@@ -1,8 +1,8 @@
-import s from 'node-switchbot';
+import Switchbot from 'node-switchbot';
 
 class SwitchbotAgentImpl {
   async scanAndPress(deviceAddress: string) {
-    const switchBot = new s.Switchbot();
+    const switchBot = new Switchbot();
     const bot_list = await switchBot.discover({
       model: 'H',
       quick: true,

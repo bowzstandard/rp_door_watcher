@@ -3,6 +3,7 @@ declare module 'node-switchbot' {
     discover: (params: ISwitchbotDiscoverParams) => Promise<SwitchbotDevice[]>;
     wait: (msec: number) => Promise<void>;
   }
+  export = Switchbot;
   class SwitchbotDevice {
     down: () => Promise<void>;
     up: () => Promise<void>;
