@@ -1,6 +1,6 @@
 import { IRadioReceivedUnit, IRadioReceiverListener } from '../interfaces';
 import fs from 'fs';
-import { SwitchBotAgent } from '../lib/switch_bot_agent';
+import { SwitchbotAgent } from '../lib/switch_bot_agent';
 
 const SENSOR_ID = process.env.SENSOR_ID ?? '01';
 const STATE_FILE = './data/portal.json';
@@ -31,7 +31,7 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
   }
 
   private switchLighting() {
-    SwitchBotAgent.scanAndPress(SWITCH_BOT_DEVICE_ADDRESS);
+    SwitchbotAgent.scanAndPress(SWITCH_BOT_DEVICE_ADDRESS);
   }
 
   private getPreviousState(): boolean {
