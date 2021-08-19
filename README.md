@@ -1,6 +1,6 @@
 ## setup
 
-https://github.com/noble/noble
+https://github.com/abandonware/noble
 のセットアップを行う
 
 ## 回路

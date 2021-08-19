@@ -1,8 +1,12 @@
 import { IRadioReceivedUnit, IRadioReceiverListener } from '../interfaces';
 import fs from 'fs';
+import { SwitchBotAgent } from '../lib/switch_bot_agent';
 
 const SENSOR_ID = process.env.SENSOR_ID ?? '01';
 const STATE_FILE = './data/portal.json';
+const OPEN_STATE = '00';
+const SWITCH_BOT_DEVICE_ADDRESS = 'F2:F6:C2:CF:9A:9F';
+
 class PortalUseCaseImpl implements IRadioReceiverListener {
   previousState: boolean | null = null;
   public render(sensorUnit: IRadioReceivedUnit) {
@@ -12,10 +16,10 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
     // isOpenがnullだったらjsonから状態を読み込む
     // isOpenとvalueを比較
     // 同じだったら終了
-    // 違う値なら通知してjsonへ書き込み
+    // 違う値ならswitchbot通知してjsonへ書き込み
     // web側はjsonみるから独立
 
-    const currentState = sensorUnit.sensorValue === '01';
+    const currentState = sensorUnit.sensorValue === OPEN_STATE;
     const previousState = this.getPreviousState();
 
     if (currentState === previousState) {
@@ -26,7 +30,9 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
     this.writeJson(currentState);
   }
 
-  private switchLighting() {}
+  private switchLighting() {
+    SwitchBotAgent.scanAndPress(SWITCH_BOT_DEVICE_ADDRESS);
+  }
 
   private getPreviousState(): boolean {
     if (this.previousState !== null) {

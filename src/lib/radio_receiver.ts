@@ -36,7 +36,7 @@ class RadioReceiverAgentImpl {
         parseInt(sensorVoltage, 16) +
         ' mV) => ' +
         sensorValue;
-      console.log(str, data);
+      // console.log(str, data);
 
       this.listeners.forEach((listener: IRadioReceiverListener) => {
         listener.render({
