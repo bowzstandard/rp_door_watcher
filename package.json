@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@abandonware/noble": "*",
+    "@abandonware/noble": "^1.9.1",
     "@serialport/parser-readline": "^9.0.7",
     "node-switchbot": "^1.0.5",
     "serialport": "^9.2.0",

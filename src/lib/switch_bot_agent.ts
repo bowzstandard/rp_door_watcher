@@ -5,7 +5,7 @@ class SwitchbotAgentImpl {
     const switchBot = new Switchbot();
     const bot_list = await switchBot.discover({
       model: 'H',
-      quick: false,
+      quick: true,
       id: deviceAddress,
     });
 
