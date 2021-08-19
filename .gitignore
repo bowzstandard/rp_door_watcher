@@ -90,3 +90,5 @@ node_modules/
 yarn-error.log
 
 .npmrc
+
+data/
