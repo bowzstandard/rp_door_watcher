@@ -4,7 +4,7 @@ import fs from 'fs';
 const SENSOR_ID = process.env.SENSOR_ID ?? '01';
 const STATE_FILE = './data/portal.json';
 class PortalUseCaseImpl implements IRadioReceiverListener {
-  isOpen: boolean | null = null;
+  previousState: boolean | null = null;
   public render(sensorUnit: IRadioReceivedUnit) {
     if (sensorUnit.sensorId !== SENSOR_ID) {
       return;
@@ -16,7 +16,7 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
     // web側はjsonみるから独立
 
     const currentState = sensorUnit.sensorValue === '01';
-    const previousState = this.readJson()?.previousState;
+    const previousState = this.getPreviousState();
 
     if (currentState === previousState) {
       return;
@@ -28,13 +28,25 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
 
   private switchLighting() {}
 
+  private getPreviousState(): boolean {
+    if (this.previousState !== null) {
+      return this.previousState;
+    }
+
+    return this.readJson()?.previousState;
+  }
+
   private readJson(): any {
-    return JSON.parse(
-      fs.readFileSync(STATE_FILE, {
-        flag: 'a',
-        encoding: 'utf-8',
-      })
-    );
+    try {
+      return JSON.parse(
+        fs.readFileSync(STATE_FILE, {
+          flag: 'a',
+          encoding: 'utf-8',
+        })
+      );
+    } catch (e) {
+      return undefined;
+    }
   }
 
   private writeJson(currentState: boolean) {
