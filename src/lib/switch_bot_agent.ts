@@ -5,7 +5,7 @@ class SwitchbotAgentImpl {
     const switchBot = new Switchbot();
     const bot_list = await switchBot.discover({
       model: 'H',
-      quick: true,
+      quick: false,
       id: deviceAddress,
     });
 
@@ -17,7 +17,7 @@ class SwitchbotAgentImpl {
     // Put the Bot's arm down (stretch the arm)
     await device.down();
     // Wait for 5 seconds
-    await switchBot.wait(5000);
+    // await switchBot.wait(5000);
     // Put the Bot's arm up (retract the arm)
     await device.up();
   }
