@@ -11,11 +11,7 @@ $ pm2 install typescript
 $ pm2 start ts-node -- src/main.ts
 ```
 
-### daemon
-
-```shell
-$ forever start -c ts-node src/main.ts
-```
+https://github.com/Unitech/pm2/issues/3503#issuecomment-378360142
 
 ## 回路
 
