@@ -10,11 +10,8 @@ class SwitchbotAgentImpl {
       });
 
       const filtered_peripheral = found_peripherals.filter((peripheral) => {
-        console.log(peripheral.id, deviceId);
-        peripheral.id === deviceId;
+        return peripheral.id === deviceId;
       });
-
-      console.log(filtered_peripheral);
 
       if (filtered_peripheral.length === 0) {
         throw new Error('No device was found.');
