@@ -7,6 +7,9 @@ declare module 'node-switchbot' {
   class SwitchbotDevice {
     down: () => Promise<void>;
     up: () => Promise<void>;
+    id: string;
+    address: string;
+    model: string;
   }
   type ISwitchbotDiscoverParams = {
     duration?: number;
