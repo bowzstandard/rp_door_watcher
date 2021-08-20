@@ -18,10 +18,7 @@ class SwitchbotAgentImpl {
       }
       // The `SwitchbotDeviceWoHand` object representing the found Bot.
       const device = filtered_peripheral[0];
-      // Put the Bot's arm down (stretch the arm)
-      await device.down();
-      // Put the Bot's arm up (retract the arm)
-      await device.up();
+      await device.press();
     } catch (e) {
       console.log('SWICHBOT ERROR', e);
     }

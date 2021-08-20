@@ -51,6 +51,7 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
         })
       );
     } catch (e) {
+      console.log('JSON PARSE ERROR', e);
       return undefined;
     }
   }
