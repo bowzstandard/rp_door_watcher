@@ -27,10 +27,13 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
     }
 
     this.switchLighting();
-    this.writeJson(currentState);
+    this.setCurrentState(currentState);
   }
 
   private switchLighting() {
+    if (this.previousState === null) {
+      return;
+    }
     SwitchbotAgent.scanAndPress(SWITCH_BOT_DEVICE_ADDRESS);
   }
 
@@ -56,7 +59,8 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
     }
   }
 
-  private writeJson(currentState: boolean) {
+  private setCurrentState(currentState: boolean) {
+    this.previousState = currentState;
     fs.writeFileSync(
       STATE_FILE,
       JSON.stringify({ previousState: currentState }, null, '\t')
