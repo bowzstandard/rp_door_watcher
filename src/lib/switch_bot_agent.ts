@@ -14,6 +14,8 @@ class SwitchbotAgentImpl {
         peripheral.id === deviceId;
       });
 
+      console.log(filtered_peripheral);
+
       if (filtered_peripheral.length === 0) {
         throw new Error('No device was found.');
       }
