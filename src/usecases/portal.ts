@@ -5,7 +5,7 @@ import { SwitchbotAgent } from '../lib/switch_bot_agent';
 const SENSOR_ID = process.env.SENSOR_ID ?? '01';
 const STATE_FILE = './data/portal.json';
 const OPEN_STATE = '00';
-const SWITCH_BOT_DEVICE_ADDRESS = 'F2:F6:C2:CF:9A:9F';
+const SWITCH_BOT_DEVICE_ADDRESS = 'f2f6c2cf9a9f';
 
 class PortalUseCaseImpl implements IRadioReceiverListener {
   previousState: boolean | null = null;
