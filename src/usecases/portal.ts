@@ -26,7 +26,7 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
       return;
     }
 
-    // this.switchLighting();
+    this.switchLighting();
     this.writeJson(currentState);
   }
 
