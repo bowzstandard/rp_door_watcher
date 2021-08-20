@@ -44,6 +44,12 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
 
   private readJson(): any {
     try {
+      console.log(
+        fs.readFileSync(STATE_FILE, {
+          flag: 'a',
+          encoding: 'utf-8',
+        })
+      );
       return JSON.parse(
         fs.readFileSync(STATE_FILE, {
           flag: 'a',
