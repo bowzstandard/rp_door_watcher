@@ -3,7 +3,7 @@ import fs from 'fs';
 import { SwitchbotAgent } from '../lib/switch_bot_agent';
 
 const SENSOR_ID = process.env.SENSOR_ID ?? '01';
-const STATE_FILE = `${process.cwd()}/data/portal.json`;
+const STATE_FILE = `${process.cwd()}/src/data/portal.json`;
 const OPEN_STATE = '00';
 const SWITCH_BOT_DEVICE_ADDRESS = 'f2f6c2cf9a9f';
 
