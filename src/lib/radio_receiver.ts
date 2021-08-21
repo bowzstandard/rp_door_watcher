@@ -23,20 +23,9 @@ class RadioReceiverAgentImpl {
     const parser = new parsers.Readline({ delimiter: '\r\n' });
     this.port.pipe(parser);
     parser.on('data', (data) => {
-      const date = new Date();
       const sensorId = data.substr(1, 2);
       const sensorVoltage = data.substr(27, 4);
       const sensorValue = data.substr(33, 2);
-
-      const str =
-        date.toString() +
-        'センサ:' +
-        sensorId +
-        ' (' +
-        parseInt(sensorVoltage, 16) +
-        ' mV) => ' +
-        sensorValue;
-      // console.log(str, data);
 
       this.listeners.forEach((listener: IRadioReceiverListener) => {
         listener.render({

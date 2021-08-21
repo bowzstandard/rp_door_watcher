@@ -40,6 +40,11 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
     if (this.previousState === null) {
       return;
     }
+    if (SwitchbotAgent.isRunning) {
+      console.log('RESERVED SWITCH');
+      SwitchbotAgent.switchReserved();
+      return;
+    }
     SwitchbotAgent.scanAndPress(SWITCH_BOT_DEVICE_ADDRESS);
   }
 

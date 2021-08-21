@@ -1,7 +1,19 @@
 import Switchbot from 'node-switchbot';
 
 class SwitchbotAgentImpl {
+  isRunning: boolean = false;
+  isReserved: boolean = false;
+
+  switchReserved() {
+    this.isReserved = !this.isReserved;
+  }
+
   async scanAndPress(deviceId: string) {
+    if (this.isRunning) {
+      return;
+    }
+    this.isRunning = true;
+
     try {
       const switchBot = new Switchbot();
       const found_peripherals = await switchBot.discover({
@@ -19,9 +31,15 @@ class SwitchbotAgentImpl {
       // The `SwitchbotDeviceWoHand` object representing the found Bot.
       const device = filtered_peripheral[0];
       await device.press();
+      if (!this.isReserved) {
+        return;
+      }
+      await this.scanAndPress(deviceId);
     } catch (e) {
       console.log(`[${new Date().toISOString()}]SWICHBOT ERROR => ${e}`);
     }
+
+    this.isRunning = false;
   }
 }
 
