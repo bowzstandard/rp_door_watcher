@@ -34,6 +34,7 @@ class SwitchbotAgentImpl {
       if (!this.isReserved) {
         return;
       }
+      this.isReserved = false;
       await this.scanAndPress(deviceId);
     } catch (e) {
       console.log(`[${new Date().toISOString()}]SWICHBOT ERROR => ${e}`);
