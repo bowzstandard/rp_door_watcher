@@ -33,15 +33,19 @@ class SwitchbotAgentImpl {
       await device.press();
       this.isRunning = false;
 
-      if (!this.isReserved) {
-        return;
-      }
-      this.isReserved = false;
-      await this.scanAndPress(deviceId);
+      await this.reservedLoop(deviceId);
     } catch (e) {
       this.isRunning = false;
       console.log(`[${new Date().toISOString()}]SWICHBOT ERROR => ${e}`);
     }
+  }
+
+  private async reservedLoop(deviceId: string) {
+    if (!this.isReserved) {
+      return;
+    }
+    this.isReserved = false;
+    await this.scanAndPress(deviceId);
   }
 }
 
