@@ -31,16 +31,17 @@ class SwitchbotAgentImpl {
       // The `SwitchbotDeviceWoHand` object representing the found Bot.
       const device = filtered_peripheral[0];
       await device.press();
+      this.isRunning = false;
+
       if (!this.isReserved) {
         return;
       }
       this.isReserved = false;
       await this.scanAndPress(deviceId);
     } catch (e) {
+      this.isRunning = false;
       console.log(`[${new Date().toISOString()}]SWICHBOT ERROR => ${e}`);
     }
-
-    this.isRunning = false;
   }
 }
 
