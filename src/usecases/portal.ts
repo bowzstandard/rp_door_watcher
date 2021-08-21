@@ -27,7 +27,7 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
     }
 
     console.log(
-      `[${new Date().toISOString}]DOOR STATE UPDATED => ${
+      `[${new Date().toISOString()}]DOOR STATE UPDATED => ${
         currentState ? 'OPEN' : 'CLOSE'
       }`
     );
@@ -60,7 +60,7 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
         })
       );
     } catch (e) {
-      console.log(`[${new Date().toISOString}]READ FILE ERROR => ${e}`);
+      console.log(`[${new Date().toISOString()}]READ FILE ERROR => ${e}`);
       return undefined;
     }
   }
@@ -73,7 +73,7 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
         JSON.stringify({ previousState: currentState }, null, '\t')
       );
     } catch (e) {
-      console.log(`[${new Date().toISOString}]WRITE FILE ERROR => ${e}`);
+      console.log(`[${new Date().toISOString()}]WRITE FILE ERROR => ${e}`);
     }
   }
 }
