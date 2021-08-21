@@ -26,6 +26,12 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
       return;
     }
 
+    console.log(
+      `[${new Date().toISOString}]DOOR STATE UPDATED => ${
+        currentState ? 'OPEN' : 'CLOSE'
+      }`
+    );
+
     this.switchLighting();
     this.setCurrentState(currentState);
   }
