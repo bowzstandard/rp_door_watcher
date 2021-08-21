@@ -20,7 +20,7 @@ class SwitchbotAgentImpl {
       const device = filtered_peripheral[0];
       await device.press();
     } catch (e) {
-      console.log('SWICHBOT ERROR', e);
+      console.log(`[${new Date().toISOString}]SWICHBOT ERROR => ${e}`);
     }
   }
 }

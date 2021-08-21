@@ -60,17 +60,21 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
         })
       );
     } catch (e) {
-      console.log('JSON PARSE ERROR', e);
+      console.log(`[${new Date().toISOString}]READ FILE ERROR => ${e}`);
       return undefined;
     }
   }
 
   private setCurrentState(currentState: boolean) {
     this.previousState = currentState;
-    fs.writeFileSync(
-      STATE_FILE,
-      JSON.stringify({ previousState: currentState }, null, '\t')
-    );
+    try {
+      fs.writeFileSync(
+        STATE_FILE,
+        JSON.stringify({ previousState: currentState }, null, '\t')
+      );
+    } catch (e) {
+      console.log(`[${new Date().toISOString}]WRITE FILE ERROR => ${e}`);
+    }
   }
 }
 
