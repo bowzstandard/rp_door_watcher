@@ -1,7 +1,7 @@
 import { IRadioReceivedUnit, IRadioReceiverListener } from '../interfaces';
 import fs from 'fs';
 import { SwitchbotAgent } from '../lib/switch_bot_agent';
-
+import { LineNotificationAgent } from '../lib/line_notification_agent';
 const SENSOR_ID = process.env.SENSOR_ID ?? '01';
 const STATE_FILE = `${process.cwd()}/src/data/portal.json`;
 const OPEN_STATE = '00';
@@ -32,8 +32,13 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
       }`
     );
 
-    this.switchLighting();
+    // this.switchLighting();
+    this.switchNotification(currentState);
     this.setCurrentState(currentState);
+  }
+
+  private switchNotification(currentState: boolean) {
+    LineNotificationAgent.notify(currentState);
   }
 
   private switchLighting() {
