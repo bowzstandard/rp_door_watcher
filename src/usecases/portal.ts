@@ -9,10 +9,10 @@ const SWITCH_BOT_DEVICE_ADDRESS = 'f2f6c2cf9a9f';
 
 class PortalUseCaseImpl implements IRadioReceiverListener {
   previousState: boolean | null = null;
-  switchbBot?: SwitchbotAgent;
+  switchBot?: SwitchbotAgent;
 
   constructor() {
-    this.switchbBot = new SwitchbotAgent(SWITCH_BOT_DEVICE_ADDRESS);
+    this.switchBot = new SwitchbotAgent(SWITCH_BOT_DEVICE_ADDRESS);
   }
 
   public render(sensorUnit: IRadioReceivedUnit) {
@@ -51,15 +51,15 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
     if (this.previousState === null) {
       return;
     }
-    if (!this.switchbBot) {
+    if (!this.switchBot) {
       return;
     }
-    if (this.switchbBot.isRunning) {
+    if (this.switchBot.isRunning) {
       console.log('RESERVED SWITCH');
-      this.switchbBot.switchReserved();
+      this.switchBot.switchReserved();
       return;
     }
-    this.switchbBot.scanAndPress();
+    this.switchBot.scanAndPress();
   }
 
   private getPreviousState(): boolean {

@@ -1,9 +1,9 @@
-import * as Switchbot from 'node-switchbot';
+import Switchbot from 'node-switchbot';
 
 export class SwitchbotAgent {
   isRunning: boolean = false;
   isReserved: boolean = false;
-  device?: Switchbot.SwitchbotDevice;
+  device?: unknown;
 
   constructor(readonly deviceId: string) {}
 
@@ -13,7 +13,7 @@ export class SwitchbotAgent {
 
   private async discover() {
     try {
-      const switchBot = new Switchbot.Switchbot();
+      const switchBot = new Switchbot();
       const found_peripherals = await switchBot.discover({
         model: 'H',
         quick: false,
