@@ -1,9 +1,9 @@
-import { Switchbot, SwitchbotDevice } from 'node-switchbot';
+import * as Switchbot from 'node-switchbot';
 
 export class SwitchbotAgent {
   isRunning: boolean = false;
   isReserved: boolean = false;
-  device?: SwitchbotDevice;
+  device?: Switchbot.SwitchbotDevice;
 
   constructor(readonly deviceId: string) {}
 
@@ -12,21 +12,26 @@ export class SwitchbotAgent {
   }
 
   private async discover() {
-    const switchBot = new Switchbot();
-    const found_peripherals = await switchBot.discover({
-      model: 'H',
-      quick: false,
-    });
+    try {
+      const switchBot = new Switchbot.Switchbot();
+      const found_peripherals = await switchBot.discover({
+        model: 'H',
+        quick: false,
+      });
 
-    const filtered_peripheral = found_peripherals.filter((peripheral) => {
-      return peripheral.id === this.deviceId;
-    });
+      const filtered_peripheral = found_peripherals.filter((peripheral) => {
+        return peripheral.id === this.deviceId;
+      });
 
-    if (filtered_peripheral.length === 0) {
-      throw new Error('No device was found.');
+      if (filtered_peripheral.length === 0) {
+        this.device = undefined;
+        throw new Error('No device was found.');
+      }
+      // The `SwitchbotDeviceWoHand` object representing the found Bot.
+      this.device = filtered_peripheral[0];
+    } catch (e) {
+      console.log(e);
     }
-    // The `SwitchbotDeviceWoHand` object representing the found Bot.
-    this.device = filtered_peripheral[0];
   }
 
   switchReserved() {

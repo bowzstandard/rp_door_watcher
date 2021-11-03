@@ -1,9 +1,9 @@
 declare module 'node-switchbot' {
-  export class Switchbot {
+  class Switchbot {
     discover: (params: ISwitchbotDiscoverParams) => Promise<SwitchbotDevice[]>;
     wait: (msec: number) => Promise<void>;
   }
-  export class SwitchbotDevice {
+  class SwitchbotDevice {
     down: () => Promise<void>;
     up: () => Promise<void>;
     press: () => Promise<void>;
@@ -11,7 +11,7 @@ declare module 'node-switchbot' {
     address: string;
     model: string;
   }
-  export type ISwitchbotDiscoverParams = {
+  type ISwitchbotDiscoverParams = {
     duration?: number;
     model?: 'H' | 'T' | 'M' | 'CS' | 'c';
     id?: string;
