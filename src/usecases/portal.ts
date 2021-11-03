@@ -9,6 +9,12 @@ const SWITCH_BOT_DEVICE_ADDRESS = 'f2f6c2cf9a9f';
 
 class PortalUseCaseImpl implements IRadioReceiverListener {
   previousState: boolean | null = null;
+  switchbBot?: SwitchbotAgent;
+
+  constructor() {
+    this.switchbBot = new SwitchbotAgent(SWITCH_BOT_DEVICE_ADDRESS);
+  }
+
   public render(sensorUnit: IRadioReceivedUnit) {
     if (sensorUnit.sensorId !== SENSOR_ID) {
       return;
@@ -32,7 +38,7 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
       }`
     );
 
-    // this.switchLighting();
+    this.switchLighting();
     this.switchNotification(currentState);
     this.setCurrentState(currentState);
   }
@@ -45,12 +51,15 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
     if (this.previousState === null) {
       return;
     }
-    if (SwitchbotAgent.isRunning) {
-      console.log('RESERVED SWITCH');
-      SwitchbotAgent.switchReserved();
+    if (!this.switchbBot) {
       return;
     }
-    SwitchbotAgent.scanAndPress(SWITCH_BOT_DEVICE_ADDRESS);
+    if (this.switchbBot.isRunning) {
+      console.log('RESERVED SWITCH');
+      this.switchbBot.switchReserved();
+      return;
+    }
+    this.switchbBot.scanAndPress();
   }
 
   private getPreviousState(): boolean {

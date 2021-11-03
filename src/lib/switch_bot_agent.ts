@@ -1,52 +1,65 @@
-import Switchbot from 'node-switchbot';
+import { Switchbot, SwitchbotDevice } from 'node-switchbot';
 
-class SwitchbotAgentImpl {
+export class SwitchbotAgent {
   isRunning: boolean = false;
   isReserved: boolean = false;
+  device?: SwitchbotDevice;
+
+  constructor(readonly deviceId: string) {}
+
+  init() {
+    this.discover();
+  }
+
+  private async discover() {
+    const switchBot = new Switchbot();
+    const found_peripherals = await switchBot.discover({
+      model: 'H',
+      quick: false,
+    });
+
+    const filtered_peripheral = found_peripherals.filter((peripheral) => {
+      return peripheral.id === this.deviceId;
+    });
+
+    if (filtered_peripheral.length === 0) {
+      throw new Error('No device was found.');
+    }
+    // The `SwitchbotDeviceWoHand` object representing the found Bot.
+    this.device = filtered_peripheral[0];
+  }
 
   switchReserved() {
     this.isReserved = !this.isReserved;
   }
 
-  async scanAndPress(deviceId: string) {
+  async scanAndPress() {
+    if (!this.device) {
+      await this.discover();
+      await this.scanAndPress();
+      return;
+    }
     if (this.isRunning) {
       return;
     }
     this.isRunning = true;
 
     try {
-      const switchBot = new Switchbot();
-      const found_peripherals = await switchBot.discover({
-        model: 'H',
-        quick: false,
-      });
-
-      const filtered_peripheral = found_peripherals.filter((peripheral) => {
-        return peripheral.id === deviceId;
-      });
-
-      if (filtered_peripheral.length === 0) {
-        throw new Error('No device was found.');
-      }
-      // The `SwitchbotDeviceWoHand` object representing the found Bot.
-      const device = filtered_peripheral[0];
-      await device.press();
+      await this.device.press();
       this.isRunning = false;
 
-      await this.reservedLoop(deviceId);
+      await this.reservedLoop();
     } catch (e) {
       this.isRunning = false;
       console.log(`[${new Date().toISOString()}]SWICHBOT ERROR => ${e}`);
     }
   }
 
-  private async reservedLoop(deviceId: string) {
+  private async reservedLoop() {
     if (!this.isReserved) {
       return;
     }
     this.isReserved = false;
-    await this.scanAndPress(deviceId);
+    await this.scanAndPress();
   }
 }
-
-export const SwitchbotAgent = new SwitchbotAgentImpl();
