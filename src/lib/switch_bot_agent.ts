@@ -3,7 +3,7 @@ import Switchbot from 'node-switchbot';
 export class SwitchbotAgent {
   isRunning: boolean = false;
   isReserved: boolean = false;
-  device?: unknown;
+  device?: any;
 
   constructor(readonly deviceId: string) {}
 
