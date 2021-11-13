@@ -57,13 +57,13 @@ export class SwitchbotAgent {
     } catch (e) {
       this.isRunning = false;
       console.log(`[${new Date().toISOString()}]SWICHBOT ERROR => ${e}`);
-      await new Promise(() => {
-        setTimeout((res) => {
-          res();
-        }, 5000);
-      });
-      await this.scanAndPress();
-      // this.switchReserved();
+      // await new Promise(() => {
+      //   setTimeout((res) => {
+      //     res();
+      //   }, 5000);
+      // });
+      // await this.scanAndPress();
+      this.switchReserved();
     }
   }
 
