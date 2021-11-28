@@ -1,4 +1,4 @@
-import request from 'request';
+import fetch from 'node-fetch';
 
 class LineNotificationAgentImpl {
   async notify(isOpen: boolean) {
@@ -8,20 +8,15 @@ class LineNotificationAgentImpl {
 
     const payload: string = encodeURI(`message=${message}`);
 
-    request.post(
-      {
-        uri: `https://notify-api.line.me/api/notify?${payload}`,
+    try {
+      await fetch(`https://notify-api.line.me/api/notify?${payload}`, {
         headers: {
           Authorization: `Bearer ${process.env.LINE_NOTIFY_TOKEN ?? ''}`,
         },
-        json: {
-          // JSONをPOSTする場合書く
-        },
-      },
-      (err, res, data) => {
-        console.log(data);
-      }
-    );
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
 
