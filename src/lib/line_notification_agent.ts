@@ -13,6 +13,7 @@ class LineNotificationAgentImpl {
         headers: {
           Authorization: `Bearer ${process.env.LINE_NOTIFY_TOKEN ?? ''}`,
         },
+        method: 'POST',
       });
     } catch (e) {
       console.log(e);
