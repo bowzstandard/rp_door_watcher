@@ -28,7 +28,7 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
     const currentState = sensorUnit.sensorValue === OPEN_STATE;
     const previousState = this.getPreviousState();
 
-    console.log(`SENSOR INFO => ${sensorUnit}`);
+    console.log(`SENSOR INFO => ${JSON.stringify(sensorUnit)}`);
 
     if (currentState === previousState) {
       return;
