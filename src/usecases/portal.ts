@@ -4,7 +4,7 @@ import { SwitchbotAgent } from '../lib/switch_bot_agent';
 import { LineNotificationAgent } from '../lib/line_notification_agent';
 const SENSOR_ID = process.env.SENSOR_ID ?? '01';
 const STATE_FILE = `${process.cwd()}/src/data/portal.json`;
-const OPEN_STATE = '00';
+const OPEN_STATE = '01';
 const SWITCH_BOT_DEVICE_ADDRESS = 'f2f6c2cf9a9f';
 
 class PortalUseCaseImpl implements IRadioReceiverListener {
@@ -27,6 +27,8 @@ class PortalUseCaseImpl implements IRadioReceiverListener {
 
     const currentState = sensorUnit.sensorValue === OPEN_STATE;
     const previousState = this.getPreviousState();
+
+    console.log(`SENSOR INFO => ${sensorUnit}`);
 
     if (currentState === previousState) {
       return;
