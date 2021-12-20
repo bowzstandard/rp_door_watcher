@@ -1,5 +1,7 @@
 import Switchbot, { SwitchbotDevice } from 'node-switchbot';
 
+const ERROR_IGNORE_CASES = ['Error: The device returned an error: 0x03ff00'];
+
 export class SwitchbotAgent {
   isRunning: boolean = false;
   isReserved: boolean = false;
@@ -57,6 +59,11 @@ export class SwitchbotAgent {
     } catch (e) {
       this.isRunning = false;
       console.log(`[${new Date().toISOString()}]SWICHBOT ERROR => ${e}`);
+
+      if (ERROR_IGNORE_CASES.includes(e)) {
+        return;
+      }
+
       this.switchReserved();
     }
   }
