@@ -22,7 +22,7 @@ export class SwitchbotAgent {
       });
 
       const filtered_peripheral = found_peripherals.filter((peripheral) => {
-        return peripheral.id === this.deviceId;
+        return peripheral.address === this.deviceId;
       });
 
       if (filtered_peripheral.length === 0) {

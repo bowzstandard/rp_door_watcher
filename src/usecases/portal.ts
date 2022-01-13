@@ -5,7 +5,7 @@ import { LineNotificationAgent } from '../lib/line_notification_agent';
 const SENSOR_ID = process.env.SENSOR_ID ?? '01';
 const STATE_FILE = `${process.cwd()}/src/data/portal.json`;
 const OPEN_STATE = '01';
-const SWITCH_BOT_DEVICE_ADDRESS = 'e19a4251082b';
+const SWITCH_BOT_DEVICE_ADDRESS = 'e1:9a:42:51:08:2b';
 
 class PortalUseCaseImpl implements IRadioReceiverListener {
   previousState: boolean | null = null;
