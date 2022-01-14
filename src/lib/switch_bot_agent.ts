@@ -1,4 +1,5 @@
 import Switchbot, { SwitchbotDevice } from 'node-switchbot';
+import { sleep } from './timer';
 
 const ERROR_IGNORE_CASES = ['Error: The device returned an error: 0x03ff00'];
 
@@ -69,6 +70,7 @@ export class SwitchbotAgent {
   }
 
   private async reservedLoop() {
+    await sleep();
     if (!this.isReserved) {
       return;
     }
