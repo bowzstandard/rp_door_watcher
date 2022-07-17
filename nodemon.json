@@ -1,0 +1,10 @@
+{
+  "watch": ["src"],
+  "delay": "3",
+  "ext": "ts",
+  "ignore": ["*.test.ts"],
+  "execMap": {
+    "js": "yarn build && node"
+  },
+  "verbose": true
+}

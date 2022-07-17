@@ -92,3 +92,5 @@ yarn-error.log
 .npmrc
 
 data/
+
+dist/
