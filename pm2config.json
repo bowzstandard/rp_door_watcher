@@ -1,9 +1,0 @@
-{
-  "name": "rp_door_watcher",
-  "script": "ts-node -- src/main.ts",
-
-  "env": {
-    "NODE_ENV": "production",
-    "LINE_NOTIFY_TOKEN": "KoKp1FYdir1M4u7j7XZ2yQScZuJSgjvQpJfX8mL7GBF"
-  }
-}

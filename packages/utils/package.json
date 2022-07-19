@@ -1,0 +1,20 @@
+{
+  "name": "@bowzstandard/rp_door_watcher_utils",
+  "version": "1.0.0",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "clean": "yarn rimraf dist",
+    "build": "yarn clean && tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/rp_door_watcher"
+  },
+  "author": "",
+  "dependencies": {},
+  "devDependencies": {}
+}

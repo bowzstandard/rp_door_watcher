@@ -1,5 +1,5 @@
 import SerialPort, { parsers } from 'serialport';
-import { IRadioReceiverListener } from '../interfaces';
+import { IRadioReceiverListener } from '@bowzstandard/rp_door_watcher_interfaces';
 
 const DEVICE = process.env.DEVICE ?? '/dev/ttyUSB0';
 const BAUD_RATE = 115200;

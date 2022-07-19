@@ -1,5 +1,8 @@
-import { RadioReceiverAgent } from './lib/radio_receiver';
-import { PortalUseCase } from './usecases/portal';
+import { RadioReceiverAgent } from './lib';
+import { PortalUseCase } from './usecases';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 function init() {
   // TODO:抽象化して複数チャンネルで使えるようにする

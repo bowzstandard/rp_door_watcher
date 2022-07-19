@@ -1,11 +1,8 @@
 import Switchbot, { SwitchbotDevice } from 'node-switchbot';
-import { sleep } from './timer';
 
 const ERROR_IGNORE_CASES = ['Error: The device returned an error: 0x03ff00'];
 
 export class SwitchbotAgent {
-  isRunning: boolean = false;
-  isReserved: boolean = false;
   device?: SwitchbotDevice;
 
   constructor(readonly deviceId: string) {}
@@ -37,44 +34,23 @@ export class SwitchbotAgent {
     }
   }
 
-  switchReserved() {
-    this.isReserved = !this.isReserved;
-  }
-
   async scanAndPress() {
     if (!this.device) {
       await this.discover();
       await this.scanAndPress();
       return;
     }
-    if (this.isRunning) {
-      return;
-    }
-    this.isRunning = true;
 
     try {
       await this.device.press();
-      this.isRunning = false;
-
-      await this.reservedLoop();
     } catch (e) {
-      this.isRunning = false;
       console.log(`[${new Date().toISOString()}]SWICHBOT ERROR => ${e}`);
 
-      if (ERROR_IGNORE_CASES.includes(e)) {
+      if (typeof e === 'string' && ERROR_IGNORE_CASES.includes(e)) {
         return;
       }
 
-      this.switchReserved();
+      throw e;
     }
-  }
-
-  private async reservedLoop() {
-    await sleep();
-    if (!this.isReserved) {
-      return;
-    }
-    this.isReserved = false;
-    await this.scanAndPress();
   }
 }

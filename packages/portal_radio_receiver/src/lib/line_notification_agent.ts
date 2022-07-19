@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 class LineNotificationAgentImpl {
   async notify(isOpen: boolean) {
     const message: string = `${isOpen ? '⛔' : '🆗'}ドアが${
